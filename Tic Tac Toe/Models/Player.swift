@@ -7,21 +7,18 @@
 
 import Foundation
 
-protocol PlayerProtocol: Identifiable {
+protocol PlayerProtocol: Identifiable, Equatable {
     var id: String { get }
     var name: String { get }
-    var value: PlayerValue { get set }
 }
 
-struct Player: PlayerProtocol {
+struct Player: PlayerProtocol, CustomStringConvertible {
     let id: String
     let name: String
-    var value: PlayerValue
     
-    init(id: String = UUID().uuidString, name: String, value: PlayerValue = .nought) {
+    init(id: String = UUID().uuidString, name: String) {
         self.id = id
         self.name = name
-        self.value = value
     }
     
     static func ==(lhs: Player, rhs: Player) -> Bool {
@@ -30,6 +27,10 @@ struct Player: PlayerProtocol {
     
     static func !=(lhs: Player, rhs: Player) -> Bool {
         !(lhs == rhs)
+    }
+    
+    var description: String {
+        name
     }
     
 }
